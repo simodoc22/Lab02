@@ -24,29 +24,21 @@ def carica_da_file(file_path):
 
 def aggiungi_libro(biblioteca, titolo, autore, anno, pagine, sezione, file_path,numero_sezioni):
     nuovo_libro = [titolo,autore,anno,pagine,sezione]
-    for key,val in biblioteca.items():
-        for libro in val:
-            if (titolo in libro and autore in libro and anno in libro) or (int(sezione)>numero_sezioni):
-                return None
-            else:
-                biblioteca[sezione].append(nuovo_libro)
-                try:
-                    with open(file_path,"w",encoding = "utf-8") as f:
-
+    try:
+        with open(file_path, "w", encoding="utf-8") as f:
+            for key, val in biblioteca.items():
+                for libro in val:
+                    if (titolo in libro and autore in libro and anno in libro) or (int(sezione) > numero_sezioni):
+                        return None
+                    else:
+                        biblioteca[sezione].append(nuovo_libro)
                         f.write(f"{titolo},{autore},{anno},{pagine},{sezione}\n")
-                except FileNotFoundError:
-                    return None
-                return biblioteca
+    except FileNotFoundError:
+        return None
+    return biblioteca
 
 
 
-def cerca_libro(biblioteca, titolo):
-    # TODO
-
-
-def elenco_libri_sezione_per_titolo(biblioteca, sezione):
-    """Ordina i titoli di una data sezione della biblioteca in ordine alfabetico"""
-    # TODO
 
 
 def main():
